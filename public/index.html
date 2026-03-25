@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scraper Mercado Libre</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Buscador de Mercado Libre</h1>
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Ingresa una palabra clave ej: auriculares">
+            <button id="searchBtn">Buscar</button>
+        </div>
+    </header>
+    
+    <main>
+        <div id="price-filter" class="price-filter hidden">
+            <span class="filter-label">Filtrar por precio:</span>
+            <div class="filter-inputs">
+                <input type="number" id="minPrice" placeholder="Mínimo $" min="0">
+                <span class="filter-sep">—</span>
+                <input type="number" id="maxPrice" placeholder="Máximo $" min="0">
+            </div>
+            <span id="filterCount" class="filter-count"></span>
+        </div>
+        <div id="loading" class="hidden">
+            <div class="spinner"></div>
+            <p>Cargando...</p>
+        </div>
+        <div id="error" class="error-msg hidden"></div>
+        <div class="table-container">
+            <table class="results-table">
+                <thead>
+                    <tr>
+                        <th>Miniatura</th>
+                        <th>Producto</th>
+                        <th id="thPrecio" class="sortable" title="Ordenar por precio">Precio <span id="sortIndicator"></span></th>
+                        <th>Financiación</th>
+                        <th>Logística</th>
+                        <th>Vendedor</th>
+                    </tr>
+                </thead>
+                <tbody id="resultsTableBody">
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>

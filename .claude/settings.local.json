@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find 'D:\\\\Proyectos antigravity\\\\scrap ml' -maxdepth 1 -type f -name .*)",
+      "Bash(node diagnose_seller.js)",
+      "Bash(node diagnose_seller2.js)",
+      "Bash(npx playwright:*)"
+    ]
+  }
+}

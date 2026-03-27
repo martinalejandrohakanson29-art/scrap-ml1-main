@@ -135,10 +135,41 @@ app.get('/api/search', async (req, res) => {
                     shippingStatus = shippingStatus ? shippingStatus + ' ⚡ Full' : '⚡ Full';
                 }
 
-                // Vendedor
-                const sellerEl = item.querySelector('.poly-component__seller, .ui-search-official-store-label');
+                // Vendedor (múltiples estrategias con fallback)
+                let seller = '';
+                let isTiendaOficial = false;
+                const polySellerEl = item.querySelector('.poly-component__seller');
+                if (polySellerEl) {
+                    seller = polySellerEl.innerText.trim();
+                    isTiendaOficial = polySellerEl.querySelector('[aria-label="Tienda oficial"]') !== null;
+                } else {
+                    // Fallback para layout clásico (tiendas oficiales)
+                    const officialEl = item.querySelector('.ui-search-official-store-label, .ui-search-item__brand-discoverability-label');
+                    if (officialEl) {
+                        seller = officialEl.innerText.trim();
+                        isTiendaOficial = true;
+                    }
+                }
                 const isAd = item.querySelector('.poly-component__ads-promotions') !== null;
-                const seller = sellerEl ? sellerEl.innerText.trim() : (isAd ? 'Publicidad' : '');
+                if (!seller && isAd) seller = 'Publicidad';
+
+                // Stock / Destacado (badges visibles en el listing)
+                let stock = '';
+                // Primero buscar "últimas X unidades" en texto plano
+                const allSpans = Array.from(item.querySelectorAll('span, p'));
+                const stockTextEl = allSpans.find(el => {
+                    if (el.children.length !== 0) return false;
+                    const txt = el.innerText ? el.innerText.trim().toLowerCase() : '';
+                    return (txt.includes('última') || txt.includes('últim')) &&
+                           (txt.includes('unidad') || txt.includes('disponible'));
+                });
+                if (stockTextEl) {
+                    stock = stockTextEl.innerText.trim();
+                } else {
+                    // Fallback: badge destacado (.poly-component__highlight)
+                    const highlightEl = item.querySelector('.poly-component__highlight');
+                    if (highlightEl) stock = highlightEl.innerText.trim();
+                }
 
                 return {
                     title,
@@ -149,7 +180,9 @@ app.get('/api/search', async (req, res) => {
                     image: imgUrl,
                     installments,
                     shippingStatus,
-                    seller
+                    seller,
+                    isTiendaOficial,
+                    stock
                 };
             });
         });

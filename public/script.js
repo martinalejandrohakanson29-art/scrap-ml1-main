@@ -125,6 +125,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 ? `<div class="original-price">${item.originalPrice}</div>`
                 : '';
 
+            let sellerHtml = '-';
+            if (item.seller === 'Publicidad') {
+                sellerHtml = '<span class="seller-ad">Publicidad</span>';
+            } else if (item.seller) {
+                const badge = item.isTiendaOficial ? ' <span class="seller-oficial-badge">Tienda Oficial</span>' : '';
+                sellerHtml = item.seller + badge;
+            }
+
+            const stockHtml = item.stock
+                ? `<span class="stock-badge">${item.stock}</span>`
+                : '-';
+
             tr.innerHTML = `
                 <td class="col-thumb">${imgData}</td>
                 <td class="col-product">
@@ -140,7 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 <td class="col-shipping">
                     ${item.shippingStatus ? `<span class="shipping-badge">${item.shippingStatus}</span>` : '-'}
                 </td>
-                <td class="col-seller">${item.seller === 'Publicidad' ? '<span class="seller-ad">Publicidad</span>' : (item.seller || '-')}</td>
+                <td class="col-seller">${sellerHtml}</td>
+                <td class="col-stock">${stockHtml}</td>
             `;
 
             resultsTableBody.appendChild(tr);

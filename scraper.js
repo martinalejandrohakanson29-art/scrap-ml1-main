@@ -8,11 +8,12 @@ async function scraperML(keyword) {
         console.log(`Buscando: "${keyword}"`)
 
         browser = await chromium.launch({
-            headless: true,
+            headless: false,
             args: [
                 '--no-sandbox',
                 '--disable-setuid-sandbox',
-                '--disable-blink-features=AutomationControlled'
+                '--disable-blink-features=AutomationControlled',
+                '--start-maximized'
             ]
         })
 

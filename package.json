@@ -1,10 +1,13 @@
 {
   "name": "scrap-ml",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Scraper de MercadoLibre (Playwright + Chrome) para analizar competencia",
+  "main": "scraper.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "sync": "node sync.js",
+    "consulta": "node consulta.js",
+    "instalar": "node instalar.js"
   },
   "keywords": [],
   "author": "",
@@ -16,8 +19,7 @@
     "express": "^5.2.1",
     "playwright": "^1.58.2"
   },
-  "scripts": {
-    "start": "node server.js",
-    "sync": "node sync.js"
+  "engines": {
+    "node": ">=18"
   }
 }

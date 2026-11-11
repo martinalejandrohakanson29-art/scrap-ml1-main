@@ -9,13 +9,29 @@
 <body>
     <header>
         <h1>Buscador de Mercado Libre</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Ingresa una palabra clave ej: auriculares">
-            <button id="searchBtn">Buscar</button>
+
+        <div class="tabs">
+            <button class="tab-btn active" data-tab="search">Buscar artículo</button>
+            <button class="tab-btn" data-tab="seller">Catálogo de vendedor</button>
+        </div>
+
+        <div id="tab-search" class="tab-pane">
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Ingresa una palabra clave ej: auriculares">
+                <button id="searchBtn">Buscar</button>
+            </div>
+        </div>
+
+        <div id="tab-seller" class="tab-pane hidden">
+            <div class="search-container">
+                <input type="text" id="sellerUrlInput" placeholder="ej: https://www.mercadolibre.com.ar/pagina/hermanrepuestos">
+                <button id="loadSellerBtn">Cargar vendedor</button>
+            </div>
         </div>
     </header>
-    
+
     <main>
+        <!-- Filtro de precio (modo búsqueda) -->
         <div id="price-filter" class="price-filter hidden">
             <span class="filter-label">Filtrar por precio:</span>
             <div class="filter-inputs">
@@ -25,11 +41,42 @@
             </div>
             <span id="filterCount" class="filter-count"></span>
         </div>
+
+        <!-- Panel de vendedor (modo catálogo) -->
+        <div id="seller-panel" class="seller-panel hidden">
+            <div class="seller-panel__header">
+                <div>
+                    <div class="seller-panel__name" id="sellerName"></div>
+                    <div class="seller-panel__meta" id="sellerMeta"></div>
+                </div>
+                <div class="seller-panel__sort">
+                    <label for="sortSelect">Ordenar:</label>
+                    <select id="sortSelect">
+                        <option value="SELLER_RANKING">Más vendidos</option>
+                        <option value="PRICE_ASC">Menor precio</option>
+                        <option value="PRICE_DESC">Mayor precio</option>
+                    </select>
+                </div>
+            </div>
+            <div class="seller-panel__categories">
+                <button class="category-btn active" data-url="" data-name="Todos los productos">Todos los productos</button>
+                <div id="categoryList" class="category-list"></div>
+            </div>
+        </div>
+
         <div id="loading" class="hidden">
             <div class="spinner"></div>
-            <p>Cargando...</p>
+            <p id="loadingText">Cargando...</p>
         </div>
         <div id="error" class="error-msg hidden"></div>
+
+        <!-- Paginación (modo catálogo) -->
+        <div id="pagination" class="pagination hidden">
+            <button id="prevPage" disabled>← Anterior</button>
+            <span id="pageInfo"></span>
+            <button id="nextPage">Siguiente →</button>
+        </div>
+
         <div class="table-container">
             <table class="results-table">
                 <thead>
@@ -37,10 +84,10 @@
                         <th>Miniatura</th>
                         <th>Producto</th>
                         <th id="thPrecio" class="sortable" title="Ordenar por precio">Precio <span id="sortIndicator"></span></th>
-                        <th>Financiación</th>
+                        <th id="thCol4">Financiación</th>
                         <th>Logística</th>
-                        <th>Vendedor</th>
-                        <th>Stock / Destacado</th>
+                        <th id="thCol6">Vendedor</th>
+                        <th id="thCol7">Stock / Destacado</th>
                     </tr>
                 </thead>
                 <tbody id="resultsTableBody">

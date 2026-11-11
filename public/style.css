@@ -336,3 +336,204 @@ main {
     display: inline-block;
     white-space: nowrap;
 }
+
+/* ── Tabs ─────────────────────────────────────────────────────────────── */
+.tabs {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    margin: 0 auto 1.5rem;
+    max-width: 420px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 6px;
+    padding: 4px;
+}
+
+.tab-btn {
+    flex: 1;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #555;
+    transition: background 0.2s, color 0.2s;
+}
+
+.tab-btn.active {
+    background: #fff;
+    color: #1a1a1a;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+}
+
+.tab-btn:hover:not(.active) {
+    background: rgba(255,255,255,0.5);
+    color: #1a1a1a;
+}
+
+/* ── Panel de vendedor ────────────────────────────────────────────────── */
+.seller-panel {
+    background: #fff;
+    border-radius: 8px;
+    padding: 1.25rem 1.5rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.seller-panel__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.seller-panel__name {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #1a1a1a;
+}
+
+.seller-panel__meta {
+    font-size: 0.85rem;
+    color: #888;
+    margin-top: 2px;
+}
+
+.seller-panel__sort {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.seller-panel__sort select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    outline: none;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.seller-panel__sort select:focus {
+    border-color: var(--accent);
+}
+
+.seller-panel__categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.category-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-btn {
+    padding: 6px 14px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    background: #f7f7f7;
+    color: #444;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s, color 0.15s;
+    white-space: nowrap;
+}
+
+.category-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: #e8f0fe;
+}
+
+.category-btn.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #fff;
+}
+
+.cat-count {
+    font-size: 0.78rem;
+    opacity: 0.75;
+    margin-left: 3px;
+}
+
+/* ── Paginación ──────────────────────────────────────────────────────── */
+.pagination {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    margin-bottom: 0.5rem;
+}
+
+.pagination button {
+    padding: 8px 18px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: #fff;
+    color: var(--accent);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+}
+
+.pagination button:hover:not(:disabled) {
+    background: #e8f0fe;
+    border-color: var(--accent);
+}
+
+.pagination button:disabled {
+    color: #bbb;
+    border-color: #eee;
+    cursor: not-allowed;
+}
+
+#pageInfo {
+    font-size: 0.9rem;
+    color: #666;
+    min-width: 160px;
+    text-align: center;
+}
+
+/* ── Badges de vendedor ──────────────────────────────────────────────── */
+.discount-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    background-color: #e8f5e9;
+    color: #2e7d32;
+    border: 1px solid #c8e6c9;
+    white-space: nowrap;
+}
+
+.best-seller-badge {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    background-color: #fff8e1;
+    color: #e65100;
+    border: 1px solid #ffcc02;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+}

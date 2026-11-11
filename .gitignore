@@ -1,3 +1,8 @@
 node_modules/
 .env
-public/debug.png
+# Perfil de Chrome con la sesión de ML (cookies): nunca se sube
+.perfil-ml/
+# Capturas de diagnóstico
+public/debug*.png
+# Permisos locales de Claude Code de cada PC
+.claude/settings.local.json
